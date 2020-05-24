@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="order">
+	<head>
+		<meta charset="utf-8" />
+        <title>订单详情</title>
+        <link rel="stylesheet" href="css/index.css"/>
+		<link rel="stylesheet" href="css/order.css"/>
+		<link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico" />
+		<script src="js/order.js" type="text/javascript"></script>
+		<script src="js/headOperate.js" type="text/javascript"></script>
+		<script src="js/ajax.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="shortcut">
+			<div class="layout">
+				<div class="fl">
+					<a href="/">欢迎来到ckkkx的小店 ~首页走这里~</a>
+				</div>
+				<div class="fr">
+					<ul class="clear_fix">
+						<li id="head-l-login" class="login_flag"><a href="/login" target="_self">登录</a></li>
+						<li id="head-l-register" class="login_flag"><a href="/register" target="_self">注册</a></li>
+						<li id="head-l-name" class="logout_flag"></li>
+						<li id="head-l-logout" class="logout_flag"><!--<a href="/">退出</a>--></li>
+						<li id="head-l-order"><!--<a href="/order">我的订单</a>--></li>
+						<li id="head-l-cart"><!--<a href="/cart">我的购物车</a>--></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="layout">
+			<a href="/"><img src="assets/bookLogo.jpg" alt="logo" class="logo"></a>
+		</div>
+	
+		<div class="layout">
+			<div class="list">
+				<div class="h">历史订单</div>
+				<table id="orders-table">
+					
+				</table>
+				
+			</div>
+		</div>
+
+	</body>
+</html>
