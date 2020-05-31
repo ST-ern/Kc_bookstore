@@ -40,9 +40,9 @@ function operateResponse(resText) {
         buttonLogin();
     } else if(resText == "no register") {
         localStorage.setItem('login', false );
-        console.log("请先注册");
+        alert("请先注册");
     } else {
         localStorage.setItem('login', false );
-        console.log("密码错误");
+        alert("密码错误");
     }
 }

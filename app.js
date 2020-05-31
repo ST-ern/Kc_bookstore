@@ -43,7 +43,7 @@ app.get('/order',function(req,res){
 app.post('/register/click', function(req, res) {
     let username = req.body.username;
     let pwd = req.body.pwd;
-    console.log(username + pwd);  
+    // console.log(username + pwd);  
     //数据库交互
     const client = new MongoClient(mongo_uri, { useNewUrlParser: true });
     client.connect(err => {
@@ -52,8 +52,8 @@ app.post('/register/click', function(req, res) {
         let condition = {'username': username};
         collection_user.find(condition).toArray(function(err, result) {
             // let duplicate = result.length;
-            console.log(err);
-            console.log(result);
+            // console.log(err);
+            // console.log(result);
             
             if(result.length===0){
                 console.log("注册成功");
@@ -79,7 +79,7 @@ app.post('/register/click', function(req, res) {
 app.post('/login/click', function(req, res) {
     let username = req.body.username;
     let pwd = req.body.pwd;
-    console.log(username + pwd);  
+    // console.log(username + pwd);  
     
     //数据库交互
     const client = new MongoClient(mongo_uri, { useNewUrlParser: true });
@@ -88,15 +88,15 @@ app.post('/login/click', function(req, res) {
     // perform actions on the collection object
     let condition = {'username': username};
     collection_user.find(condition).toArray(function(err, result) {
-        console.log(result);
-        console.log(err);
+        // console.log(result);
+        // console.log(err);
         if(result.length===0) {
             res.send("no register");
         } else if(result[0].pwd == pwd) {
-            console.log("yes");
+            // console.log("yes");
             res.send("true");
         } else {
-            console.log("no");
+            // console.log("no");
             res.send("false");
         }
     });
@@ -110,7 +110,7 @@ app.post('/good/add', function(req, res) {
     let username = req.body.username;
     let good_id = req.body.goodId;
     let good_num = req.body.goodNum;
-    console.log('good_id:'+good_id+',good_num:'+good_num);
+    // console.log('good_id:'+good_id+',good_num:'+good_num);
     // 数据库添加货物到购物车
     const client = new MongoClient(mongo_uri, { useNewUrlParser: true });
     client.connect(err => {
@@ -142,7 +142,7 @@ app.post('/good/add', function(req, res) {
                 if(!mutiple) {
                     goods.push(data);
                 }
-                console.log(goods);
+                // console.log(goods);
                 collection_cart.updateOne(condition, {$set: {goods: goods} });
                 res.send("success");
                 client.close();
@@ -154,7 +154,7 @@ app.post('/good/add', function(req, res) {
 });
 app.post('/cart/goods',function(req, res) {
     let username = req.body.username;
-    console.log('/cart/goods===username:' + username);
+    // console.log('/cart/goods===username:' + username);
     const client = new MongoClient(mongo_uri, { useNewUrlParser: true });
     client.connect(err => {
         const collection_cart = client.db("bookstore").collection("cart");
@@ -169,7 +169,7 @@ app.post('/cart/goods',function(req, res) {
                 let cart_goodInfo = result[0].goods;
                 let good = [];
                 let info = {};
-                console.log(cart_goodInfo);
+                // console.log(cart_goodInfo);
                 for(let i=0; i<cart_goodInfo.length; i++){
                     let goodId = {
                         goods_id : cart_goodInfo[i].goods_id,
@@ -192,7 +192,7 @@ app.post('/cart/goods',function(req, res) {
                     //     good.push(info);
                     // });
                 }
-                console.log('good='+good);
+                // console.log('good='+good);
                 res.send(good);
                 client.close();
             }
@@ -202,14 +202,14 @@ app.post('/cart/goods',function(req, res) {
 app.post('/cart/info', function(req, res) {
     let goods_id = req.body.goods_id;
     let goods_number = req.body.goods_number;
-    console.log('/cart/info===goods_id:' + goods_id + ' goods_number:' + goods_number);
+    // console.log('/cart/info===goods_id:' + goods_id + ' goods_number:' + goods_number);
     const client = new MongoClient(mongo_uri, { useNewUrlParser: true });
     client.connect(err => {
         const collection_good = client.db("bookstore").collection("good");
         let condition = {'id': goods_id};
         collection_good.find(condition).toArray(function(err, result) {
             let aim = result[0];
-            console.log('aim.img='+aim.img);
+            // console.log('aim.img='+aim.img);
             let info = {
                 goods_id: goods_id,
                 goods_img: aim.img,
@@ -218,7 +218,7 @@ app.post('/cart/info', function(req, res) {
                 goods_number: goods_number,
                 goods_amount: aim.price * goods_number,
             };
-            console.log('info='+info);
+            // console.log('info='+info);
             res.send(info);
             client.close();
         });
@@ -230,8 +230,8 @@ app.post('/cart/submit',function(req, res) {
     //数据库
     let username = req.body.username;
     let order = req.body.order;
-    console.log('/cart/submit===username:' + username);
-    console.log(req.body);
+    // console.log('/cart/submit===username:' + username);
+    // console.log(req.body);
 
 
     const client1 = new MongoClient(mongo_uri, { useNewUrlParser: true });
@@ -254,7 +254,7 @@ app.post('/cart/submit',function(req, res) {
         const collection_cart = client2.db("bookstore").collection("cart");
         // perform actions on the collection object
         let condition = {username: username};
-        console.log(condition);
+        // console.log(condition);
         collection_cart.deleteMany(condition);
         client2.close();
     });
@@ -263,7 +263,7 @@ app.post('/cart/submit',function(req, res) {
 
 app.post('/order/get_item', function(req, res) {
     let username = req.body.username;
-    console.log('/order/get_item===username:' + username);
+    // console.log('/order/get_item===username:' + username);
     let condition = {username: username};
     // goods为根据用户名获取orders
     // let orders = [
@@ -331,6 +331,6 @@ app.post('/order/get_item', function(req, res) {
 
 
 
-app.listen(5000, () => {
-  console.log('示例应用正在监听 5000 端口!');
+app.listen(3000, () => {
+  console.log('示例应用正在监听 3000 端口!');
 });

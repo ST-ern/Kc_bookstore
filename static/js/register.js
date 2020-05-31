@@ -19,7 +19,7 @@ function registerPost() {
         alert("您已登陆，请先退出。")
     } else if (userName == "" || userName == null) {
         document.getElementById("name").style.color = "red";
-        document.getElementById("name").innerHTML = "用户名为6-10位英文或数字";
+        alert("用户名为6-10位英文或数字");
     } else {
         // let jsonData = {
         //     username: userName,
@@ -57,11 +57,11 @@ function operateResponse(resText) {
     if (resText == "forbid") {
         localStorage.setItem('login', false );
         document.getElementById("name").style.color = "red";
-        document.getElementById("name").innerHTML = "用户名含有非法词语";
+        alert("用户名非法");
     } else if (resText == "already have") {
         localStorage.setItem('login', false );
         document.getElementById("name").style.color = "red";
-        document.getElementById("name").innerHTML = "用户名已被使用";
+        alert("用户名已使用");
     } else {
         localStorage.setItem('login', true);
         localStorage.setItem('username', store_username);
